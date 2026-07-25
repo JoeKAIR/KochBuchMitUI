@@ -9,9 +9,9 @@ namespace KochBuchMitUI
 {
     internal class KochBuch
     {
-        public BindingList<Gerichte> GerichteList = new();
-        public BindingList<Zutaten> AlleZutaten = new();
-        public ZutatenBibliothek Bibliothek { get; set; } = new();
+        private BindingList<Gerichte> GerichteList = new();
+        private BindingList<Zutaten> AlleZutaten = new();
+        private ZutatenBibliothek Bibliothek { get; set; } = new();
         public void GerichtHinzufügen(string name)
         {
             Gerichte neuesGericht = new(name);
@@ -21,7 +21,6 @@ namespace KochBuchMitUI
         public BindingList<Gerichte> GerichtAnzeigen()
 
         {
-
             return GerichteList;
         }
         public List<string> BibliothekAnzeigen()
@@ -29,11 +28,11 @@ namespace KochBuchMitUI
             return Bibliothek.AlleÜbergeben();
         }
         
-      
         public void ZutatzuGerichtHinzufügen(Gerichte gericht, string name, string menge, int kalorien)
         {
             //fügt Zutat dem Gericht was ausgewählt ist hinzu
             var dieseZutat=gericht.ZutatenHinzufügen(name, menge, kalorien);
+
             //speichert gleichzeitig die Zutat in der Bibliothek
             Bibliothek.ElementHinzufügen(dieseZutat.Name);
         }
@@ -41,6 +40,7 @@ namespace KochBuchMitUI
         {
             var GerichteSpeichernJson = JsonSerializer.Serialize(GerichteList);
             var BibliothekSpeichern = JsonSerializer.Serialize(Bibliothek.AlleÜbergeben());
+
             File.WriteAllText("kochbuch.json", GerichteSpeichernJson);
             File.WriteAllText("Bibliothek.json", BibliothekSpeichern);
             return true;
@@ -49,32 +49,47 @@ namespace KochBuchMitUI
         {
             if (File.Exists("kochbuch.json"))
             {
-                var GerichteLadenJson = File.ReadAllText("kochbuch.json");
-                var geladen=JsonSerializer.Deserialize<BindingList<Gerichte>>(GerichteLadenJson);
-                if (geladen != null)
+                try
                 {
-                    GerichteList = geladen;
-                    
-                }
-                else GerichteList = new();
+                    var GerichteLadenJson = File.ReadAllText("kochbuch.json");
+                    var geladen = JsonSerializer.Deserialize<BindingList<Gerichte>>(GerichteLadenJson);
+                    if (geladen != null)
+                    {
+                        GerichteList = geladen;
 
-               
-                
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Laden fehlgeschlagen"+ex);
+                }
+
+
             }
+            else GerichteList = new();
+            
 
             if (File.Exists("Bibliothek.json"))
             {
-                var BibliothekLaden = File.ReadAllText("Bibliothek.json");
-                var Bibliothekgeladen = JsonSerializer.Deserialize<List<string>>(BibliothekLaden);
-                if (Bibliothekgeladen != null)
+                try
                 {
-                    foreach (var b in Bibliothekgeladen)
+                    var BibliothekLaden = File.ReadAllText("Bibliothek.json");
+                    var Bibliothekgeladen = JsonSerializer.Deserialize<List<string>>(BibliothekLaden);
+                    if (Bibliothekgeladen != null)
                     {
-                        Bibliothek.ElementHinzufügen(b);
+                        foreach (var b in Bibliothekgeladen)
+                        {
+                            Bibliothek.ElementHinzufügen(b);
+                        }
+                        Console.WriteLine("geladen");
+
                     }
-                    Console.WriteLine("geladen");
-                    
                 }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Laden Fehlgeschlagen"+ex);
+                }
+               
             }
 
            

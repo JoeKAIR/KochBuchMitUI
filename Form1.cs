@@ -19,16 +19,11 @@ namespace KochBuchMitUI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                TextzuTextBox();
+                kochBuch.GerichtHinzufügen(textBox1.Text);
+                textBox1.Clear();
             }
         }
-        void TextzuTextBox()
-        {
-            kochBuch.GerichtHinzufügen(textBox1.Text);
-            textBox1.Clear();
-           // GridAnzeigen();
-
-        }
+       
         
         void ZutatenListe()
         {
