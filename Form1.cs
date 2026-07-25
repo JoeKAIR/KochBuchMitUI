@@ -3,7 +3,7 @@ namespace KochBuchMitUI
     public partial class Form1 : Form
     {
         KochBuch kochBuch = new();
-        private Gerichte ausgewähltesGericht;
+        private Gerichte? ausgewähltesGericht;
         public Form1()
         {
             InitializeComponent();
@@ -28,15 +28,15 @@ namespace KochBuchMitUI
         }
         void ListBoxFüllen()
         {
-            Listegerichte.DataSource = null;
+           
             Listegerichte.DataSource = kochBuch.GerichtAnzeigen();
-            Listegerichte.Update();
+            
         }
         void ZutatenListeFüllen(Gerichte auswahlgericht)
         {
-            Zutaten.DataSource = null;
+           
             Zutaten.DataSource = auswahlgericht.Zutaten;
-            Zutaten.Update();
+           
 
 
         }
@@ -69,10 +69,14 @@ namespace KochBuchMitUI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                kochBuch.ZutatzuGerichtHinzufügen(ausgewähltesGericht, textBox2.Text, "", 0);
-                textBox2.Clear();
-                Zutaten.Update();
-                ZutatenListeFüllen(ausgewähltesGericht);
+                if (ausgewähltesGericht != null) 
+                
+                {
+                    kochBuch.ZutatzuGerichtHinzufügen(ausgewähltesGericht, textBox2.Text, "", 0);
+                    textBox2.Clear();
+                }
+               
+                
                 
             }      
         }

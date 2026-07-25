@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel;
 
 namespace KochBuchMitUI
 {
@@ -11,7 +12,7 @@ namespace KochBuchMitUI
 
         public int Schwierigkeit { get; set; }
         
-        public List<Zutaten>Zutaten { get; set; } =new List<Zutaten>();
+        public BindingList<Zutaten>Zutaten { get; set; } =new BindingList<Zutaten>();
 
         public Gerichte(string name)
         {
