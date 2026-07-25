@@ -7,7 +7,10 @@ namespace KochBuchMitUI
         public Form1()
         {
             InitializeComponent();
-            ListBoxFüllen();
+            ZutatenListe();
+            kochBuch.DatenLaden();
+            Listegerichte.DataSource = kochBuch.GerichtAnzeigen();
+            ZListe.DataSource = kochBuch.BibliothekAnzeigen();
         }
 
 
@@ -23,28 +26,24 @@ namespace KochBuchMitUI
         {
             kochBuch.GerichtHinzufügen(textBox1.Text);
             textBox1.Clear();
-            ListBoxFüllen();
+           // GridAnzeigen();
 
         }
-        void ListBoxFüllen()
+        
+        void ZutatenListe()
         {
-           
-            Listegerichte.DataSource = kochBuch.GerichtAnzeigen();
-            
+            ZListe.DataSource = kochBuch.BibliothekAnzeigen();
         }
         void ZutatenListeFüllen(Gerichte auswahlgericht)
         {
-           
-            Zutaten.DataSource = auswahlgericht.Zutaten;
-           
+
+            ZutatenGrid.DataSource = auswahlgericht.Zutaten;
 
 
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
 
         }
+
+
 
         private void Listegerichte_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -55,30 +54,33 @@ namespace KochBuchMitUI
             }
         }
 
-        private void Zutaten_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (ausgewähltesGericht != null) 
-                
+                if (ausgewähltesGericht != null)
+
                 {
                     kochBuch.ZutatzuGerichtHinzufügen(ausgewähltesGericht, textBox2.Text, "", 0);
                     textBox2.Clear();
+                    ZutatenListe();
                 }
-               
-                
-                
-            }      
+
+
+
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            kochBuch.Speichern();
         }
     }
 }

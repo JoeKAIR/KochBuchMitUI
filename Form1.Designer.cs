@@ -32,8 +32,10 @@
             textBox1 = new TextBox();
             Überschriftgerichte = new Label();
             Listegerichte = new ListBox();
-            Zutaten = new ListBox();
+            ZListe = new ListBox();
             textBox2 = new TextBox();
+            ZutatenGrid = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)ZutatenGrid).BeginInit();
             SuspendLayout();
             // 
             // textBox1
@@ -52,7 +54,6 @@
             Überschriftgerichte.Size = new Size(67, 20);
             Überschriftgerichte.TabIndex = 1;
             Überschriftgerichte.Text = "Gerichte:";
-            Überschriftgerichte.Click += label1_Click;
             // 
             // Listegerichte
             // 
@@ -63,14 +64,13 @@
             Listegerichte.TabIndex = 2;
             Listegerichte.SelectedIndexChanged += Listegerichte_SelectedIndexChanged;
             // 
-            // Zutaten
+            // ZListe
             // 
-            Zutaten.FormattingEnabled = true;
-            Zutaten.Location = new Point(560, 220);
-            Zutaten.Name = "Zutaten";
-            Zutaten.Size = new Size(179, 184);
-            Zutaten.TabIndex = 3;
-            Zutaten.SelectedIndexChanged += Zutaten_SelectedIndexChanged;
+            ZListe.FormattingEnabled = true;
+            ZListe.Location = new Point(560, 220);
+            ZListe.Name = "ZListe";
+            ZListe.Size = new Size(179, 184);
+            ZListe.TabIndex = 3;
             // 
             // textBox2
             // 
@@ -78,21 +78,33 @@
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(225, 27);
             textBox2.TabIndex = 4;
-            textBox2.TextChanged += textBox2_TextChanged;
             textBox2.KeyDown += textBox2_KeyDown;
+            // 
+            // ZutatenGrid
+            // 
+            ZutatenGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ZutatenGrid.Location = new Point(236, 253);
+            ZutatenGrid.Name = "ZutatenGrid";
+            ZutatenGrid.RowHeadersWidth = 51;
+            ZutatenGrid.Size = new Size(300, 188);
+            ZutatenGrid.TabIndex = 5;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(ZutatenGrid);
             Controls.Add(textBox2);
-            Controls.Add(Zutaten);
+            Controls.Add(ZListe);
             Controls.Add(Listegerichte);
             Controls.Add(Überschriftgerichte);
             Controls.Add(textBox1);
             Name = "Form1";
             Text = "Form1";
+            FormClosed += Form1_FormClosed;
+            Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)ZutatenGrid).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -102,7 +114,8 @@
         private TextBox textBox1;
         private Label Überschriftgerichte;
         private ListBox Listegerichte;
-        private ListBox Zutaten;
+        private ListBox ZListe;
         private TextBox textBox2;
+        private DataGridView ZutatenGrid;
     }
 }

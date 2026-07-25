@@ -23,10 +23,11 @@ namespace KochBuchMitUI
 
             
         }
-        public void ZutatenHinzufügen(string name,string menge,int kalorien)
+        public Zutaten ZutatenHinzufügen(string name,string menge,int kalorien)
         {
             Zutaten neueZutat = new( name, menge, kalorien);
             Zutaten.Add(neueZutat);
+            return neueZutat;
         }
         public override string ToString()
         {

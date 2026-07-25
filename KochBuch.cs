@@ -10,6 +10,8 @@ namespace KochBuchMitUI
     internal class KochBuch
     {
         public BindingList<Gerichte> GerichteList = new();
+        public BindingList<Zutaten> AlleZutaten = new();
+        public ZutatenBibliothek Bibliothek { get; set; } = new();
         public void GerichtHinzufügen(string name)
         {
             Gerichte neuesGericht = new(name);
@@ -22,18 +24,28 @@ namespace KochBuchMitUI
 
             return GerichteList;
         }
+        public List<string> BibliothekAnzeigen()
+        {
+            return Bibliothek.AlleÜbergeben();
+        }
+        
+      
         public void ZutatzuGerichtHinzufügen(Gerichte gericht, string name, string menge, int kalorien)
         {
-
-            gericht.ZutatenHinzufügen(name, menge, kalorien);
+            //fügt Zutat dem Gericht was ausgewählt ist hinzu
+            var dieseZutat=gericht.ZutatenHinzufügen(name, menge, kalorien);
+            //speichert gleichzeitig die Zutat in der Bibliothek
+            Bibliothek.ElementHinzufügen(dieseZutat.Name);
         }
         public bool Speichern()
         {
             var GerichteSpeichernJson = JsonSerializer.Serialize(GerichteList);
+            var BibliothekSpeichern = JsonSerializer.Serialize(Bibliothek.AlleÜbergeben());
             File.WriteAllText("kochbuch.json", GerichteSpeichernJson);
+            File.WriteAllText("Bibliothek.json", BibliothekSpeichern);
             return true;
         }
-        public bool DatenLaden()
+        public void DatenLaden()
         {
             if (File.Exists("kochbuch.json"))
             {
@@ -42,15 +54,30 @@ namespace KochBuchMitUI
                 if (geladen != null)
                 {
                     GerichteList = geladen;
-                    return true;
+                    
                 }
                 else GerichteList = new();
-                return true;
+
+               
+                
             }
-            
+
+            if (File.Exists("Bibliothek.json"))
+            {
+                var BibliothekLaden = File.ReadAllText("Bibliothek.json");
+                var Bibliothekgeladen = JsonSerializer.Deserialize<List<string>>(BibliothekLaden);
+                if (Bibliothekgeladen != null)
+                {
+                    foreach (var b in Bibliothekgeladen)
+                    {
+                        Bibliothek.ElementHinzufügen(b);
+                    }
+                    Console.WriteLine("geladen");
+                    
+                }
+            }
+
            
-           
-            return true;
         }
     }
 }
