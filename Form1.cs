@@ -10,7 +10,7 @@ namespace KochBuchMitUI
             ZutatenListe();
             kochBuch.DatenLaden();
             Listegerichte.DataSource = kochBuch.GerichtAnzeigen();
-            ZListe.DataSource = kochBuch.BibliothekAnzeigen();
+            //ZListe.DataSource = kochBuch.BibliothekAnzeigen();
         }
 
 
@@ -27,7 +27,7 @@ namespace KochBuchMitUI
 
         void ZutatenListe()
         {
-            ZListe.DataSource = kochBuch.BibliothekAnzeigen();
+            //ZListe.DataSource = kochBuch.BibliothekAnzeigen();
         }
         void ZutatenListeFüllen(Gerichte auswahlgericht)
         {
@@ -60,7 +60,7 @@ namespace KochBuchMitUI
                 {
                     kochBuch.ZutatzuGerichtHinzufügen(ausgewähltesGericht, textBox2.Text, "", 0);
                     textBox2.Clear();
-                    ZutatenListe();
+                    //ZutatenListe();
                 }
 
 
@@ -85,8 +85,19 @@ namespace KochBuchMitUI
 
         private void EingabeErfolgt(object sender, EventArgs e)
         {
-           // kochBuch.SucheNachString(this.Text);
-            listBox1.DataSource = kochBuch.SucheNachString(textBox2.Text);
+            // kochBuch.SucheNachString(this.Text);
+            //listBox1.DataSource = kochBuch.SucheNachString(textBox2.Text);
+          //  ZListe.DataSource = kochBuch.SucheNachString(ZListe.Text);
+        }
+
+        private void ZListe_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EingabeComboBox(object sender, EventArgs e)
+        {
+            ZListe.DataSource = kochBuch.SucheNachString(textBox2.Text);
         }
     }
 }
