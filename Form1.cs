@@ -23,8 +23,8 @@ namespace KochBuchMitUI
                 textBox1.Clear();
             }
         }
-       
-        
+
+
         void ZutatenListe()
         {
             ZListe.DataSource = kochBuch.BibliothekAnzeigen();
@@ -76,6 +76,17 @@ namespace KochBuchMitUI
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             kochBuch.Speichern();
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void EingabeErfolgt(object sender, EventArgs e)
+        {
+           // kochBuch.SucheNachString(this.Text);
+            listBox1.DataSource = kochBuch.SucheNachString(textBox2.Text);
         }
     }
 }

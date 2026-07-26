@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.ComponentModel;
 namespace KochBuchMitUI
 {
     internal class ZutatenBibliothek
@@ -19,10 +20,15 @@ namespace KochBuchMitUI
            
         }
 
-        public string BibliothekDurchsuchen(string suche)
+        public List <string> BibliothekDurchsuchen(string suche)
         {
-            ZutatenAlle.Contains(suche);
-            return suche;
+            //List<string> SuchausgabeListe;
+            var gesucht = ZutatenAlle
+            .Where(x => x.Contains( suche,StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+            return gesucht;
         }
+        
     }
 }

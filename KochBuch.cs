@@ -36,6 +36,12 @@ namespace KochBuchMitUI
             //speichert gleichzeitig die Zutat in der Bibliothek
             Bibliothek.ElementHinzufügen(dieseZutat.Name);
         }
+        public BindingList<string> SucheNachString(string eingabe)
+        {
+            List<string>durchsuchListe=Bibliothek.BibliothekDurchsuchen(eingabe);
+            BindingList<string> bindingdurchsuchListe = new BindingList<string>(durchsuchListe);
+            return bindingdurchsuchListe;
+        }
         public bool Speichern()
         {
             var GerichteSpeichernJson = JsonSerializer.Serialize(GerichteList);
