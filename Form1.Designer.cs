@@ -29,53 +29,57 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            Überschriftgerichte = new Label();
+            SuchVorschläge = new ListBox();
+            ZutatenGrid = new DataGridView();
             Listegerichte = new ListBox();
             textBox2 = new TextBox();
-            ZutatenGrid = new DataGridView();
-            MeinKochBuchLabel = new Label();
-            ZutatenVonAuswahlLabel = new Label();
-            tableLayoutPanel1 = new TableLayoutPanel();
-            listBox1 = new ListBox();
-            ZListe = new ComboBox();
+            textBox1 = new TextBox();
+            tabControl1 = new TabControl();
+            tabPage1 = new TabPage();
+            tabPage2 = new TabPage();
+            label2 = new Label();
+            Überschrift = new Label();
+            bearbeitenLabel = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)ZutatenGrid).BeginInit();
-            tableLayoutPanel1.SuspendLayout();
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
-            // textBox1
+            // SuchVorschläge
             // 
-            textBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            textBox1.Location = new Point(3, 3);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Neues Gericht Hinzufügen";
-            textBox1.Size = new Size(120, 27);
-            textBox1.TabIndex = 0;
-            textBox1.KeyDown += textBox1_KeyDown;
+            SuchVorschläge.FormattingEnabled = true;
+            SuchVorschläge.Location = new Point(19, 90);
+            SuchVorschläge.Name = "SuchVorschläge";
+            SuchVorschläge.Size = new Size(150, 104);
+            SuchVorschläge.TabIndex = 5;
+            SuchVorschläge.KeyDown += SuchVorschlägeKeyDown;
             // 
-            // Überschriftgerichte
+            // ZutatenGrid
             // 
-            Überschriftgerichte.AutoSize = true;
-            Überschriftgerichte.Location = new Point(331, 0);
-            Überschriftgerichte.Name = "Überschriftgerichte";
-            Überschriftgerichte.Size = new Size(67, 20);
-            Überschriftgerichte.TabIndex = 1;
-            Überschriftgerichte.Text = "Gerichte:";
+            ZutatenGrid.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            ZutatenGrid.BackgroundColor = SystemColors.ControlLight;
+            ZutatenGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ZutatenGrid.GridColor = SystemColors.MenuBar;
+            ZutatenGrid.Location = new Point(238, 106);
+            ZutatenGrid.Name = "ZutatenGrid";
+            ZutatenGrid.RowHeadersWidth = 51;
+            ZutatenGrid.Size = new Size(491, 315);
+            ZutatenGrid.TabIndex = 5;
             // 
             // Listegerichte
             // 
-            Listegerichte.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             Listegerichte.FormattingEnabled = true;
-            Listegerichte.Location = new Point(3, 70);
+            Listegerichte.Location = new Point(11, 94);
             Listegerichte.Name = "Listegerichte";
-            Listegerichte.Size = new Size(120, 364);
+            Listegerichte.Size = new Size(162, 224);
             Listegerichte.TabIndex = 2;
             Listegerichte.SelectedIndexChanged += Listegerichte_SelectedIndexChanged;
             // 
             // textBox2
             // 
-            textBox2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            textBox2.Location = new Point(129, 3);
+            textBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            textBox2.Location = new Point(19, 57);
             textBox2.Name = "textBox2";
             textBox2.PlaceholderText = "Neue Zutat Hinzufügen";
             textBox2.Size = new Size(194, 27);
@@ -83,109 +87,114 @@
             textBox2.TextChanged += EingabeErfolgt;
             textBox2.KeyDown += textBox2_KeyDown;
             // 
-            // ZutatenGrid
+            // textBox1
             // 
-            ZutatenGrid.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            ZutatenGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            ZutatenGrid.BackgroundColor = SystemColors.ControlLight;
-            ZutatenGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ZutatenGrid.GridColor = SystemColors.MenuBar;
-            ZutatenGrid.Location = new Point(129, 70);
-            ZutatenGrid.Name = "ZutatenGrid";
-            ZutatenGrid.RowHeadersWidth = 51;
-            ZutatenGrid.Size = new Size(196, 315);
-            ZutatenGrid.TabIndex = 5;
+            textBox1.Location = new Point(11, 33);
+            textBox1.Name = "textBox1";
+            textBox1.PlaceholderText = "Neues Gericht Hinzufügen";
+            textBox1.Size = new Size(303, 27);
+            textBox1.TabIndex = 0;
+            textBox1.TextChanged += textBox1_TextChanged;
+            textBox1.KeyDown += textBox1_KeyDown;
             // 
-            // MeinKochBuchLabel
+            // tabControl1
             // 
-            MeinKochBuchLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            MeinKochBuchLabel.AutoSize = true;
-            MeinKochBuchLabel.Location = new Point(3, 47);
-            MeinKochBuchLabel.Name = "MeinKochBuchLabel";
-            MeinKochBuchLabel.Size = new Size(109, 20);
-            MeinKochBuchLabel.TabIndex = 6;
-            MeinKochBuchLabel.Text = "Meine Gerichte";
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Dock = DockStyle.Fill;
+            tabControl1.Location = new Point(0, 0);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(1169, 595);
+            tabControl1.TabIndex = 10;
             // 
-            // ZutatenVonAuswahlLabel
+            // tabPage1
             // 
-            ZutatenVonAuswahlLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            ZutatenVonAuswahlLabel.AutoSize = true;
-            ZutatenVonAuswahlLabel.Location = new Point(129, 47);
-            ZutatenVonAuswahlLabel.Name = "ZutatenVonAuswahlLabel";
-            ZutatenVonAuswahlLabel.Size = new Size(125, 20);
-            ZutatenVonAuswahlLabel.TabIndex = 7;
-            ZutatenVonAuswahlLabel.Text = "Zutaten(Auswahl)";
+            tabPage1.Controls.Add(bearbeitenLabel);
+            tabPage1.Controls.Add(textBox1);
+            tabPage1.Controls.Add(Listegerichte);
+            tabPage1.Location = new Point(4, 29);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(1161, 562);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "tabPage1";
+            tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel1
+            // tabPage2
             // 
-            tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40.125F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 32.75F));
-            tableLayoutPanel1.Controls.Add(textBox1, 0, 0);
-            tableLayoutPanel1.Controls.Add(Überschriftgerichte, 2, 0);
-            tableLayoutPanel1.Controls.Add(textBox2, 1, 0);
-            tableLayoutPanel1.Controls.Add(MeinKochBuchLabel, 0, 1);
-            tableLayoutPanel1.Controls.Add(Listegerichte, 0, 2);
-            tableLayoutPanel1.Controls.Add(ZutatenVonAuswahlLabel, 1, 1);
-            tableLayoutPanel1.Controls.Add(ZutatenGrid, 1, 2);
-            tableLayoutPanel1.Controls.Add(listBox1, 2, 2);
-            tableLayoutPanel1.Dock = DockStyle.Left;
-            tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 3;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 6.66666651F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 8.222222F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 85.1111145F));
-            tableLayoutPanel1.Size = new Size(495, 450);
-            tableLayoutPanel1.TabIndex = 8;
-            tableLayoutPanel1.Paint += tableLayoutPanel1_Paint;
+            tabPage2.Controls.Add(label2);
+            tabPage2.Controls.Add(Überschrift);
+            tabPage2.Controls.Add(ZutatenGrid);
+            tabPage2.Controls.Add(SuchVorschläge);
+            tabPage2.Controls.Add(textBox2);
+            tabPage2.Location = new Point(4, 29);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(1161, 562);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "tabPage2";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // label2
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(331, 70);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(150, 104);
-            listBox1.TabIndex = 8;
+            label2.AutoSize = true;
+            label2.Location = new Point(840, 220);
+            label2.Name = "label2";
+            label2.Size = new Size(50, 20);
+            label2.TabIndex = 7;
+            label2.Text = "label2";
             // 
-            // ZListe
+            // Überschrift
             // 
-            ZListe.FormattingEnabled = true;
-            ZListe.Location = new Point(541, 98);
-            ZListe.Name = "ZListe";
-            ZListe.Size = new Size(151, 28);
-            ZListe.TabIndex = 9;
-            ZListe.TextChanged += EingabeComboBox;
+            Überschrift.AutoSize = true;
+            Überschrift.Location = new Point(420, 3);
+            Überschrift.Name = "Überschrift";
+            Überschrift.Size = new Size(50, 20);
+            Überschrift.TabIndex = 6;
+            Überschrift.Text = "label1";
+            // 
+            // bearbeitenLabel
+            // 
+            bearbeitenLabel.AutoSize = true;
+            bearbeitenLabel.Location = new Point(198, 94);
+            bearbeitenLabel.Name = "bearbeitenLabel";
+            bearbeitenLabel.Size = new Size(81, 20);
+            bearbeitenLabel.TabIndex = 3;
+            bearbeitenLabel.TabStop = true;
+            bearbeitenLabel.Text = "Bearbeiten";
+            bearbeitenLabel.LinkClicked += bearbeitenLabel_LinkClicked;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(ZListe);
-            Controls.Add(tableLayoutPanel1);
+            ClientSize = new Size(1169, 595);
+            Controls.Add(tabControl1);
             Name = "Form1";
             Text = "Form1";
             FormClosed += Form1_FormClosed;
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)ZutatenGrid).EndInit();
-            tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private TextBox textBox1;
-        private Label Überschriftgerichte;
+        private ListBox SuchVorschläge;
+        private DataGridView ZutatenGrid;
         private ListBox Listegerichte;
         private TextBox textBox2;
-        private DataGridView ZutatenGrid;
-        private Label MeinKochBuchLabel;
-        private Label ZutatenVonAuswahlLabel;
-        private TableLayoutPanel tableLayoutPanel1;
-        private ListBox listBox1;
-        private ComboBox ZListe;
+        private TextBox textBox1;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private Label label2;
+        private Label Überschrift;
+        private LinkLabel bearbeitenLabel;
     }
 }

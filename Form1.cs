@@ -10,6 +10,8 @@ namespace KochBuchMitUI
             ZutatenListe();
             kochBuch.DatenLaden();
             Listegerichte.DataSource = kochBuch.GerichtAnzeigen();
+            SuchVorschläge.Visible = false;
+            tabControl1.SelectedIndex = 0;
             //ZListe.DataSource = kochBuch.BibliothekAnzeigen();
         }
 
@@ -45,7 +47,9 @@ namespace KochBuchMitUI
             if (Listegerichte.SelectedItem != null)
             {
                 ausgewähltesGericht = (Gerichte)Listegerichte.SelectedItem;
+                Überschrift.Text = ausgewähltesGericht.Name;
                 ZutatenListeFüllen(ausgewähltesGericht);
+               
             }
         }
 
@@ -63,8 +67,12 @@ namespace KochBuchMitUI
                     //ZutatenListe();
                 }
 
+                SuchVorschläge.Visible = false;
 
-
+            }
+            if (e.KeyCode == Keys.Down)
+            {
+                SuchVorschläge.Focus();
             }
         }
 
@@ -87,7 +95,9 @@ namespace KochBuchMitUI
         {
             // kochBuch.SucheNachString(this.Text);
             //listBox1.DataSource = kochBuch.SucheNachString(textBox2.Text);
-          //  ZListe.DataSource = kochBuch.SucheNachString(ZListe.Text);
+            SuchVorschläge.Visible = true;
+            SuchVorschläge.DataSource = kochBuch.SucheNachString(textBox2.Text);
+
         }
 
         private void ZListe_SelectedIndexChanged(object sender, EventArgs e)
@@ -97,7 +107,34 @@ namespace KochBuchMitUI
 
         private void EingabeComboBox(object sender, EventArgs e)
         {
-            ZListe.DataSource = kochBuch.SucheNachString(textBox2.Text);
+            //ZListe.DataSource = kochBuch.SucheNachString(textBox2.Text);
+        }
+
+        private void SuchVorschlägeKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (ausgewähltesGericht != null && SuchVorschläge.SelectedItem != null)
+
+                {
+                    kochBuch.ZutatzuGerichtHinzufügen(ausgewähltesGericht, SuchVorschläge.SelectedItem.ToString(), "", 0);
+                    textBox2.Clear();
+                    //ZutatenListe();
+                }
+                else textBox2.Focus();
+                SuchVorschläge.Visible = false;
+
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bearbeitenLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            tabControl1.SelectedIndex = 1;
         }
     }
 }
