@@ -5,3 +5,4 @@ I made my own search/autofill function so u dont have to type in ingredients if 
 It gets Serialized in Json when u close program 
 Im using a bit of linq for the search funcion.
 Its my very first project and im very bad TY
+Its very Work in Progress 
